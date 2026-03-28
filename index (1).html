@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="JISr60DWQ_Tv-2V1QoHy1vBd5ssag9_gIuyBgbFQt5M" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DataEcon CI – Formations & Consulting en Analyse de Données</title>
+<meta name="description" content="Expert en analyse de données, formations économétriques et consulting décisionnel en Côte d'Ivoire. Python, Stata, R, Power BI et plus.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+/* ===== VARIABLES ===== */
+:root{
+  --blue-dark:#0a1628;--blue-mid:#0f2d5e;--blue:#1a4a9f;--blue-light:#2563eb;--blue-pale:#dbeafe;
+  --orange:#f97316;--orange-dark:#ea580c;--orange-light:#fed7aa;
+  --green:#00a884;--green-dark:#128c7e;
+  --white:#fff;--gray-50:#f8fafc;--gray-100:#f1f5f9;--gray-200:#e2e8f0;
+  --gray-400:#94a3b8;--gray-600:#475569;--gray-700:#334155;--gray-800:#1e293b;
+  --font-head:'Sora',sans-serif;--font-body:'DM Sans',sans-serif;
+  --radius:12px;--radius-lg:20px;
+  --shadow:0 4px 24px rgba(10,22,40,.10);--shadow-lg:0 12px 48px rgba(10,22,40,.18);
+  --banner-h:42px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--gray-800);background:var(--white);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--gray-100)}::-webkit-scrollbar-thumb{background:var(--blue-light);border-radius:3px}
+
+/* ===== PROMO BANNER (fixe) ===== */
+#promo-banner{
+  position:fixed;top:0;left:0;right:0;z-index:1100;
+  height:var(--banner-h);overflow:hidden;
+  background:#1e293b;
+  border-bottom:1px solid rgba(249,115,22,.3);
+  display:flex;align-items:center;justify-content:center;
+}
+.promo-fixed{display:flex;align-items:center;gap:14px;font-family:var(--font-head);font-size:.8rem;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.01em}
+.promo-fixed i{color:var(--orange)}
+.promo-sep{color:rgba(255,255,255,.25);margin:0 4px}
+
+/* ===== NAVBAR ===== */
+#navbar{position:fixed;top:var(--banner-h);left:0;right:0;z-index:1000;transition:all .3s}
+#navbar.scrolled{background:var(--blue-dark);box-shadow:var(--shadow-lg);top:0}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 24px;max-width:1200px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--orange),#ff6b35);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem;color:#fff;font-weight:800;font-family:var(--font-head);flex-shrink:0}
+.logo-text{font-family:var(--font-head);font-weight:800;font-size:1.15rem;color:#fff;line-height:1.1}
+.logo-text span{color:rgba(255,255,255,.55);font-size:.65rem;font-weight:400;letter-spacing:.04em;display:block}
+.nav-links{display:flex;align-items:center;gap:2px}
+.nav-links a{color:rgba(255,255,255,.85);font-family:var(--font-head);font-size:.84rem;font-weight:500;padding:8px 13px;border-radius:8px;transition:all .2s}
+.nav-links a:hover{color:#fff;background:rgba(255,255,255,.1)}
+.nav-cta .btn{padding:9px 20px;font-size:.83rem}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.mobile-menu{display:none;position:fixed;top:calc(var(--banner-h) + 68px);left:0;right:0;background:var(--blue-dark);padding:16px 20px;flex-direction:column;gap:4px;z-index:999;border-top:1px solid rgba(255,255,255,.08)}
+.mobile-menu.scrolled-nav{top:68px}
+.mobile-menu a{color:#fff;font-family:var(--font-head);font-size:.95rem;padding:11px 14px;border-radius:8px;display:block;transition:background .2s}
+.mobile-menu a:hover{background:rgba(255,255,255,.1)}
+.mobile-menu.open{display:flex}
+
+/* ===== UTILS ===== */
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.section{padding:90px 0}
+.section-label{font-family:var(--font-head);font-size:.74rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange);margin-bottom:12px}
+.section-title{font-family:var(--font-head);font-size:clamp(1.75rem,3.2vw,2.7rem);font-weight:800;color:var(--blue-dark);line-height:1.2;margin-bottom:16px}
+.section-sub{font-size:1rem;color:var(--gray-600);max-width:600px;line-height:1.75}
+.section-header{margin-bottom:52px}
+.section-header.center{text-align:center}
+.section-header.center .section-sub{margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:50px;font-family:var(--font-head);font-weight:600;font-size:.92rem;transition:all .25s;cursor:pointer;border:none}
+.btn-primary{background:var(--orange);color:#fff;box-shadow:0 4px 18px rgba(249,115,22,.35)}
+.btn-primary:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 8px 26px rgba(249,115,22,.45)}
+.btn-outline{border:2px solid var(--white)!important;color:var(--white)}
+.btn-outline:hover{background:var(--white);color:var(--blue-dark)}
+.btn-blue{background:var(--blue-light);color:#fff}
+.btn-blue:hover{background:var(--blue);transform:translateY(-2px)}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{background:var(--green-dark);transform:translateY(-2px)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ===== HERO ===== */
+#hero{min-height:100vh;background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue-mid) 55%,#0d3472 100%);position:relative;overflow:hidden;display:flex;align-items:center;padding-top:calc(var(--banner-h) + 68px)}
+.hero-bg{position:absolute;inset:0}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:60px 60px}
+.hero-orb1{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(249,115,22,.15) 0%,transparent 70%);top:-100px;right:-100px;animation:pulse 6s infinite}
+.hero-orb2{position:absolute;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,rgba(37,99,235,.2) 0%,transparent 70%);bottom:-50px;left:-50px;animation:pulse 8s infinite 2s}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.1);opacity:1}}
+.hero-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:70px 0}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(249,115,22,.15);border:1px solid rgba(249,115,22,.3);border-radius:50px;padding:7px 16px;margin-bottom:22px}
+.hero-badge span{font-family:var(--font-head);font-size:.76rem;font-weight:600;color:var(--orange);text-transform:uppercase;letter-spacing:.1em}
+.hero-title{font-family:var(--font-head);font-size:clamp(2.1rem,4vw,3.5rem);font-weight:800;color:#fff;line-height:1.14;margin-bottom:18px}
+.hero-title .accent{color:var(--orange)}
+.hero-desc{font-size:1rem;color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:32px;max-width:480px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:44px}
+.hero-stats{display:flex;gap:28px;flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-num{font-family:var(--font-head);font-size:1.9rem;font-weight:800;color:#fff;line-height:1}
+.stat-num span{color:var(--orange)}
+.stat-label{font-size:.75rem;color:rgba(255,255,255,.55);margin-top:4px}
+.hero-visual{position:relative}
+.hero-card{background:rgba(255,255,255,.07);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:28px;color:#fff}
+.hero-card-title{font-family:var(--font-head);font-weight:700;font-size:.95rem;margin-bottom:18px;display:flex;align-items:center;gap:9px}
+.hero-chart{display:flex;align-items:flex-end;gap:7px;height:90px;margin-bottom:14px}
+.bar{flex:1;border-radius:5px 5px 0 0;animation:growBar 1.5s ease forwards}
+@keyframes growBar{from{height:0!important}}
+.bar:nth-child(1){background:linear-gradient(180deg,var(--orange),#ff8c42);height:55%;animation-delay:.1s}
+.bar:nth-child(2){background:linear-gradient(180deg,#3b82f6,#60a5fa);height:80%;animation-delay:.2s}
+.bar:nth-child(3){background:linear-gradient(180deg,var(--orange),#ff8c42);height:65%;animation-delay:.3s}
+.bar:nth-child(4){background:linear-gradient(180deg,#10b981,#34d399);height:95%;animation-delay:.4s}
+.bar:nth-child(5){background:linear-gradient(180deg,#3b82f6,#60a5fa);height:72%;animation-delay:.5s}
+.bar:nth-child(6){background:linear-gradient(180deg,var(--orange),#ff8c42);height:88%;animation-delay:.6s}
+.bar:nth-child(7){background:linear-gradient(180deg,#10b981,#34d399);height:100%;animation-delay:.7s}
+.mini-tags{display:flex;flex-wrap:wrap;gap:5px}
+.mini-tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:20px}
+.mini-tag.blue{background:rgba(37,99,235,.2);color:#93c5fd}
+.mini-tag.orange{background:rgba(249,115,22,.2);color:#fdba74}
+.mini-tag.green{background:rgba(16,185,129,.2);color:#6ee7b7}
+.floating-badge{position:absolute;background:#fff;border-radius:12px;padding:11px 16px;box-shadow:var(--shadow-lg);font-family:var(--font-head);display:flex;align-items:center;gap:10px}
+.floating-badge.top{top:-18px;right:-16px}
+.floating-badge.bottom{bottom:-18px;left:-16px}
+.fb-icon{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.fb-icon.orange{background:var(--orange-light);color:var(--orange-dark)}
+.fb-icon.blue{background:var(--blue-pale);color:var(--blue-light)}
+.fb-text{font-size:.79rem;font-weight:700;color:var(--blue-dark);line-height:1.2}
+.fb-sub{font-size:.69rem;color:var(--gray-400);font-weight:400}
+
+/* ===== FEATURES STRIP ===== */
+#features-strip{background:var(--blue-dark);padding:32px 0}
+.features-grid{display:flex;flex-wrap:wrap}
+.feature-item{flex:1;min-width:190px;display:flex;align-items:center;gap:14px;padding:18px 24px;border-right:1px solid rgba(255,255,255,.07)}
+.feature-item:last-child{border-right:none}
+.fi-icon{width:42px;height:42px;border-radius:10px;background:rgba(249,115,22,.15);display:flex;align-items:center;justify-content:center;color:var(--orange);font-size:1.15rem;flex-shrink:0}
+.fi-text strong{font-family:var(--font-head);color:#fff;font-size:.88rem;display:block}
+.fi-text span{color:rgba(255,255,255,.5);font-size:.74rem}
+
+/* ===== FORMATIONS ===== */
+#formations{background:var(--gray-50)}
+.tab-nav{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:38px;background:#fff;padding:7px;border-radius:14px;box-shadow:var(--shadow);width:fit-content}
+.tab-btn{padding:10px 20px;border-radius:9px;font-family:var(--font-head);font-size:.84rem;font-weight:600;color:var(--gray-600);transition:all .22s;white-space:nowrap;border:none;cursor:pointer;background:none}
+.tab-btn.active{background:var(--blue-light);color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.3)}
+.tab-btn:hover:not(.active){background:var(--gray-100);color:var(--blue-dark)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+.formation-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:22px}
+.formation-card{background:#fff;border-radius:var(--radius-lg);padding:26px;border:1px solid var(--gray-200);transition:all .28s;position:relative;overflow:hidden}
+.formation-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue-light),var(--orange))}
+.formation-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent}
+.fc-icon{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:16px}
+.fc-icon.blue{background:var(--blue-pale);color:var(--blue-light)}
+.fc-icon.orange{background:var(--orange-light);color:var(--orange-dark)}
+.fc-icon.green{background:#dcfce7;color:#16a34a}
+.fc-icon.purple{background:#ede9fe;color:#7c3aed}
+.fc-title{font-family:var(--font-head);font-weight:700;font-size:1rem;color:var(--blue-dark);margin-bottom:7px}
+.fc-desc{font-size:.85rem;color:var(--gray-600);line-height:1.6;margin-bottom:14px}
+.fc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px}
+.fc-tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--blue-pale);color:var(--blue-light)}
+.fc-tag.orange{background:var(--orange-light);color:var(--orange-dark)}
+.fc-levels{display:flex;gap:4px;align-items:center}
+.fc-level{width:22px;height:5px;border-radius:3px;background:var(--gray-200)}
+.fc-level.filled{background:var(--blue-light)}
+.fc-level-text{font-size:.73rem;color:var(--gray-600);margin-left:7px}
+.fc-link{display:inline-flex;align-items:center;gap:6px;color:var(--blue-light);font-family:var(--font-head);font-size:.83rem;font-weight:600;margin-top:14px;transition:gap .2s}
+.fc-link:hover{gap:10px}
+.format-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px;padding:20px;background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200)}
+.format-badge{display:flex;align-items:center;gap:7px;padding:9px 16px;background:var(--gray-50);border-radius:50px;border:1px solid var(--gray-200)}
+.format-badge i{color:var(--blue-light);font-size:.9rem}
+.format-badge span{font-family:var(--font-head);font-size:.82rem;font-weight:600;color:var(--gray-700)}
+
+/* ===== CONSULTING ===== */
+#consulting{background:#fff}
+.consulting-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.consulting-services{display:flex;flex-direction:column;gap:16px}
+.service-item{display:flex;align-items:flex-start;gap:16px;padding:20px;background:var(--gray-50);border-radius:var(--radius);border:1px solid var(--gray-200);transition:all .28s}
+.service-item:hover{border-color:var(--blue-light);background:var(--blue-pale);transform:translateX(5px)}
+.si-icon{width:44px;height:44px;border-radius:11px;background:var(--blue-light);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.05rem;flex-shrink:0}
+.si-title{font-family:var(--font-head);font-weight:700;color:var(--blue-dark);margin-bottom:3px;font-size:.95rem}
+.si-desc{font-size:.84rem;color:var(--gray-600);line-height:1.5}
+.consulting-visual{background:linear-gradient(135deg,var(--blue-mid),var(--blue-dark));border-radius:var(--radius-lg);padding:38px;color:#fff}
+.cv-title{font-family:var(--font-head);font-size:1.35rem;font-weight:800;margin-bottom:7px}
+.cv-sub{color:rgba(255,255,255,.65);font-size:.88rem;margin-bottom:28px}
+.process-steps{display:flex;flex-direction:column;gap:14px}
+.process-step{display:flex;align-items:center;gap:14px}
+.ps-num{width:34px;height:34px;border-radius:50%;background:var(--orange);font-family:var(--font-head);font-weight:800;font-size:.85rem;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+.ps-text{font-size:.88rem;color:rgba(255,255,255,.85)}
+.ps-line{width:2px;height:18px;background:rgba(255,255,255,.15);margin-left:16px}
+
+/* ===== CLIENTELE ===== */
+#clientele{background:var(--gray-50)}
+.client-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.client-card{background:#fff;border-radius:var(--radius-lg);padding:28px 20px;text-align:center;border:2px solid transparent;transition:all .28s}
+.client-card:hover{border-color:var(--blue-light);transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+.cc-icon{width:60px;height:60px;border-radius:18px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
+.cc-icon.blue{background:var(--blue-pale);color:var(--blue-light)}
+.cc-icon.orange{background:var(--orange-light);color:var(--orange-dark)}
+.cc-icon.green{background:#dcfce7;color:#16a34a}
+.cc-icon.purple{background:#ede9fe;color:#7c3aed}
+.cc-title{font-family:var(--font-head);font-weight:800;font-size:1.1rem;color:var(--blue-dark);margin-bottom:9px}
+.cc-desc{font-size:.84rem;color:var(--gray-600);line-height:1.6;margin-bottom:16px}
+.cc-tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center}
+.cc-tag{font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:20px;background:var(--gray-100);color:var(--gray-600)}
+
+/* ===== TARIFS ===== */
+#tarifs{background:#fff}
+.pricing-section{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.pricing-block{border-radius:var(--radius-lg);overflow:hidden;border:2px solid var(--gray-200);transition:all .28s;display:flex;flex-direction:column}
+.pricing-block:hover{box-shadow:var(--shadow-lg);border-color:var(--blue-light);transform:translateY(-4px)}
+.pricing-block.featured{border-color:var(--orange)}
+.pb-head{padding:26px 26px 18px}
+.pb-head.c-blue{background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid))}
+.pb-head.c-orange{background:linear-gradient(135deg,#7c2d12,var(--orange-dark))}
+.pb-head.c-green{background:linear-gradient(135deg,#065f46,#047857)}
+.pb-emoji{font-size:2rem;margin-bottom:12px;display:block}
+.pb-title{font-family:var(--font-head);font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:4px}
+.pb-subtitle{font-size:.8rem;color:rgba(255,255,255,.65)}
+.pb-body{padding:22px 26px;flex:1}
+.price-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--gray-100)}
+.price-row:last-child{border-bottom:none}
+.price-name{display:flex;align-items:flex-start;gap:9px;font-family:var(--font-head);font-weight:600;font-size:.88rem;color:var(--blue-dark);line-height:1.4;flex:1}
+.price-name i{color:var(--blue-light);margin-top:2px;flex-shrink:0;font-size:.82rem}
+.price-amt{text-align:right;flex-shrink:0}
+.price-amt .xof{font-family:var(--font-head);font-weight:800;color:var(--orange-dark);font-size:1.05rem;display:block}
+.price-amt .per{font-size:.71rem;color:var(--gray-400);display:block}
+.pb-cta{padding:0 26px 26px}
+
+/* ===== NOTE DE PAIEMENT ===== */
+.payment-note-box{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:2px solid #f59e0b;border-radius:var(--radius-lg);padding:26px 30px;margin-top:38px;position:relative;overflow:hidden}
+.payment-note-box::after{content:'💡';position:absolute;right:-8px;bottom:-12px;font-size:4.5rem;opacity:.09;pointer-events:none}
+.pn-title{font-family:var(--font-head);font-size:1rem;font-weight:800;color:#78350f;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.pn-title i{color:#d97706;font-size:1.1rem}
+.pn-rules{display:flex;flex-direction:column;gap:10px}
+.pn-rule{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;color:#92400e;line-height:1.55}
+.pn-rule i{color:#d97706;margin-top:3px;flex-shrink:0;width:15px}
+.pn-rule strong{color:#78350f}
+
+/* ===== PAIEMENT SECTION ===== */
+#paiement{background:var(--blue-dark);padding:68px 0}
+.pay-inner{text-align:center}
+.pay-inner .section-title{color:#fff}
+.pay-inner .section-sub{color:rgba(255,255,255,.65);margin:0 auto 38px}
+.pay-methods{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+.pm-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);padding:22px 28px;text-align:center;transition:all .28s;min-width:155px}
+.pm-card:hover{background:rgba(255,255,255,.14);transform:translateY(-4px)}
+.pm-icon{font-size:2.2rem;margin-bottom:10px}
+.pm-name{font-family:var(--font-head);font-weight:700;color:#fff;font-size:.95rem;margin-bottom:3px}
+.pm-detail{font-size:.76rem;color:rgba(255,255,255,.55)}
+.pm-card.wave-card{border-color:rgba(76,175,80,.5)}
+.wave-btn{display:inline-flex;align-items:center;gap:9px;background:#4CAF50;color:#fff;padding:13px 26px;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:.92rem;margin-top:28px;transition:all .25s}
+.wave-btn:hover{background:#388E3C;transform:translateY(-2px);box-shadow:0 6px 20px rgba(76,175,80,.4)}
+.sec-note{display:flex;align-items:center;justify-content:center;gap:7px;color:rgba(255,255,255,.45);font-size:.79rem;margin-top:22px}
+
+/* ===== INSCRIPTION ===== */
+#inscription{background:var(--gray-50)}
+.inscription-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:52px;align-items:start}
+.form-card{background:#fff;border-radius:var(--radius-lg);padding:38px;box-shadow:var(--shadow)}
+.form-title{font-family:var(--font-head);font-size:1.45rem;font-weight:800;color:var(--blue-dark);margin-bottom:5px}
+.form-sub{font-size:.87rem;color:var(--gray-600);margin-bottom:26px}
+.form-group{margin-bottom:16px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:block;font-family:var(--font-head);font-size:.79rem;font-weight:600;color:var(--gray-700);margin-bottom:5px}
+label .req{color:var(--orange)}
+input,select,textarea{width:100%;padding:11px 15px;border:2px solid var(--gray-200);border-radius:9px;font-family:var(--font-body);font-size:.9rem;color:var(--gray-800);transition:border-color .2s;background:#fff;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue-light)}
+textarea{min-height:88px;resize:vertical}
+.form-submit{width:100%;padding:14px;background:var(--orange);color:#fff;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:.97rem;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:6px;cursor:pointer;border:none}
+.form-submit:hover{background:var(--orange-dark);transform:translateY(-2px);box-shadow:0 7px 24px rgba(249,115,22,.4)}
+/* Sidebar WhatsApp */
+.wa-intro{background:linear-gradient(135deg,var(--green),var(--green-dark));border-radius:var(--radius-lg);padding:32px;color:#fff;margin-bottom:20px}
+.wa-intro h3{font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin-bottom:8px;display:flex;align-items:center;gap:11px}
+.wa-intro p{color:rgba(255,255,255,.85);font-size:.88rem;line-height:1.65;margin-bottom:0}
+.qr-box-card{background:#fff;border-radius:var(--radius-lg);padding:24px;text-align:center;margin-bottom:20px}
+.qr-box-card h4{font-family:var(--font-head);font-weight:700;font-size:.95rem;color:var(--blue-dark);margin-bottom:14px}
+#qrcode-main{display:flex;justify-content:center;margin-bottom:12px}
+#qrcode-main canvas,#qrcode-main img{border-radius:10px!important;padding:4px;border:3px solid var(--blue-pale)}
+.qr-note{font-size:.78rem;color:var(--gray-500)}
+.info-box{background:var(--blue-pale);border-radius:var(--radius);padding:18px 20px}
+.info-box ul{display:flex;flex-direction:column;gap:8px}
+.info-box ul li{font-size:.85rem;color:var(--gray-700);display:flex;align-items:flex-start;gap:8px;line-height:1.4}
+.info-box ul li i{color:var(--blue-light);margin-top:2px;flex-shrink:0}
+.info-box strong{font-family:var(--font-head);font-weight:700;color:var(--blue-dark);display:block;margin-bottom:10px;font-size:.9rem}
+
+/* ===== RESSOURCES / BLOG ===== */
+#ressources{background:var(--gray-50)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.blog-card{background:#fff;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--gray-200);transition:all .28s}
+.blog-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg);border-color:transparent}
+.blog-img{height:155px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;position:relative}
+.blog-img.c1{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.blog-img.c2{background:linear-gradient(135deg,#fed7aa,#fdba74)}
+.blog-img.c3{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+.blog-cat{position:absolute;top:10px;left:10px;font-family:var(--font-head);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:20px;background:#fff;color:var(--blue-light);box-shadow:var(--shadow)}
+.blog-body{padding:20px}
+.blog-title{font-family:var(--font-head);font-weight:700;font-size:.97rem;color:var(--blue-dark);margin-bottom:7px;line-height:1.4}
+.blog-excerpt{font-size:.83rem;color:var(--gray-600);line-height:1.6;margin-bottom:13px}
+.blog-meta{display:flex;align-items:center;gap:7px;font-size:.75rem;color:var(--gray-400)}
+
+/* ===== TEMOIGNAGES ===== */
+#temoignages{background:#fff;padding:80px 0}
+.temo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.temo-card{background:var(--gray-50);border-radius:var(--radius-lg);padding:26px;border:1px solid var(--gray-200);transition:all .28s}
+.temo-card:hover{box-shadow:var(--shadow);border-color:var(--blue-light)}
+.stars{color:#fbbf24;font-size:.87rem;margin-bottom:12px;letter-spacing:2px}
+.temo-text{font-size:.9rem;color:var(--gray-700);line-height:1.7;margin-bottom:18px;font-style:italic}
+.temo-author{display:flex;align-items:center;gap:11px}
+.temo-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;color:#fff;font-size:.95rem;flex-shrink:0}
+.ta-name{font-family:var(--font-head);font-weight:700;font-size:.9rem;color:var(--blue-dark)}
+.ta-role{font-size:.75rem;color:var(--gray-500)}
+
+/* ===== FAQ ===== */
+#faq{background:var(--gray-50);padding:78px 0}
+.faq-list{max-width:740px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-item{background:#fff;border-radius:var(--radius);border:1px solid var(--gray-200);overflow:hidden}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;font-family:var(--font-head);font-weight:600;font-size:.93rem;color:var(--blue-dark);transition:background .2s;gap:12px}
+.faq-q:hover{background:var(--gray-50)}
+.faq-q i{color:var(--blue-light);transition:transform .28s;flex-shrink:0}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 22px 18px;font-size:.88rem;color:var(--gray-600);line-height:1.7}
+.faq-item.open .faq-a{display:block}
+
+/* ===== CHATBOT ===== */
+#chatbot-btn{position:fixed;bottom:26px;right:26px;z-index:850;width:54px;height:54px;border-radius:50%;background:var(--blue-light);color:#fff;box-shadow:0 6px 22px rgba(37,99,235,.45);display:flex;align-items:center;justify-content:center;font-size:1.4rem;transition:all .22s;cursor:pointer;border:none}
+#chatbot-btn:hover{transform:scale(1.08);background:var(--blue)}
+#chatbot-window{position:fixed;bottom:92px;right:26px;z-index:850;width:330px;background:#fff;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);display:none;flex-direction:column;border:1px solid var(--gray-200);max-height:440px}
+#chatbot-window.open{display:flex}
+.chat-header{background:var(--blue-dark);padding:16px 18px;display:flex;align-items:center;gap:11px}
+.chat-avatar{width:36px;height:36px;border-radius:50%;background:var(--orange);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+.chat-info .chat-name{font-family:var(--font-head);font-weight:700;color:#fff;font-size:.92rem}
+.chat-info .chat-status{font-size:.68rem;color:#4ade80}
+.chat-close{margin-left:auto;color:rgba(255,255,255,.55);cursor:pointer;font-size:1rem;transition:color .2s;background:none;border:none;padding:4px}
+.chat-close:hover{color:#fff}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;max-height:270px}
+.chat-msg{max-width:83%;padding:9px 13px;border-radius:13px;font-size:.85rem;line-height:1.5}
+.chat-msg.bot{background:var(--gray-100);color:var(--gray-800);align-self:flex-start;border-bottom-left-radius:3px}
+.chat-msg.user{background:var(--blue-light);color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+.chat-sugs{padding:0 12px 10px;display:flex;flex-wrap:wrap;gap:5px}
+.chat-sug{font-size:.73rem;padding:5px 11px;border-radius:20px;background:var(--blue-pale);color:var(--blue-light);font-family:var(--font-head);font-weight:600;cursor:pointer;border:1px solid rgba(37,99,235,.18);transition:all .18s}
+.chat-sug:hover{background:var(--blue-light);color:#fff}
+.chat-input-row{padding:12px;border-top:1px solid var(--gray-200);display:flex;gap:8px}
+.chat-input{flex:1;border:2px solid var(--gray-200);border-radius:50px;padding:8px 14px;font-size:.85rem;font-family:var(--font-body);outline:none;transition:border-color .2s}
+.chat-input:focus{border-color:var(--blue-light)}
+.chat-send{width:36px;height:36px;border-radius:50%;background:var(--blue-light);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;flex-shrink:0;border:none;transition:background .2s}
+.chat-send:hover{background:var(--blue)}
+
+/* ===== FOOTER ===== */
+footer{background:var(--blue-dark);color:#fff;padding:68px 0 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.footer-logo{display:flex;align-items:center;gap:11px;margin-bottom:18px}
+.footer-desc{font-size:.84rem;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:22px;max-width:270px}
+.footer-socials{display:flex;gap:9px}
+.social-link{width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.65);font-size:.95rem;transition:all .2s}
+.social-link:hover{background:var(--orange);color:#fff}
+.footer-col h4{font-family:var(--font-head);font-weight:700;font-size:.92rem;margin-bottom:16px;color:#fff}
+.footer-col ul li{margin-bottom:9px}
+.footer-col ul li a{font-size:.84rem;color:rgba(255,255,255,.55);transition:color .2s}
+.footer-col ul li a:hover{color:#fff}
+.fc-contact{display:flex;align-items:flex-start;gap:9px;margin-bottom:11px;font-size:.84rem;color:rgba(255,255,255,.6)}
+.fc-contact i{color:var(--orange);margin-top:2px;flex-shrink:0;width:15px}
+.fc-contact a{color:rgba(255,255,255,.6);transition:color .2s}
+.fc-contact a:hover{color:#fff}
+
+.nl-btn{padding:9px 14px;background:var(--orange);border-radius:8px;color:#fff;font-family:var(--font-head);font-size:.82rem;font-weight:600;cursor:pointer;transition:background .2s;border:none;white-space:nowrap}
+.nl-btn:hover{background:var(--orange-dark)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.07);padding:20px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:.79rem;color:rgba(255,255,255,.38)}
+.footer-links{display:flex;gap:18px}
+.footer-links a{font-size:.79rem;color:rgba(255,255,255,.38);transition:color .2s}
+.footer-links a:hover{color:#fff}
+
+/* ===== PAYMENT GATE MODAL ===== */
+#payment-gate{display:none;position:fixed;inset:0;background:rgba(10,22,40,.88);z-index:2000;align-items:center;justify-content:center;backdrop-filter:blur(7px);padding:20px}
+#payment-gate.show{display:flex}
+.gate-card{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:520px;overflow:hidden;animation:bounceIn .35s ease}
+@keyframes bounceIn{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.gate-header{background:linear-gradient(135deg,var(--blue-dark),var(--blue-mid));padding:24px 28px;position:relative}
+.gate-header h2{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:#fff;margin-bottom:4px}
+.gate-header p{font-size:.83rem;color:rgba(255,255,255,.65)}
+.gate-close-btn{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.12);border:none;color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:.9rem;transition:background .2s}
+.gate-close-btn:hover{background:rgba(255,255,255,.22)}
+.gate-body{padding:28px}
+.gate-summary{background:var(--gray-50);border-radius:var(--radius);padding:16px 18px;margin-bottom:22px;border:1px solid var(--gray-200)}
+.gate-summary .gs-line{display:flex;justify-content:space-between;font-size:.88rem;margin-bottom:7px;color:var(--gray-700)}
+.gate-summary .gs-line:last-child{margin-bottom:0;font-family:var(--font-head);font-weight:700;font-size:.95rem;color:var(--blue-dark);border-top:1px solid var(--gray-200);padding-top:8px;margin-top:4px}
+.gate-summary .gs-line span:last-child{color:var(--orange-dark);font-weight:700}
+.gate-methods{display:flex;flex-direction:column;gap:11px;margin-bottom:22px}
+.gate-method{display:flex;align-items:center;gap:13px;padding:14px 16px;border:2px solid var(--gray-200);border-radius:var(--radius);cursor:pointer;transition:all .2s}
+.gate-method:hover{border-color:var(--blue-light);background:var(--blue-pale)}
+.gm-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.gm-label{font-family:var(--font-head);font-weight:700;font-size:.9rem;color:var(--blue-dark)}
+.gm-sub{font-size:.75rem;color:var(--gray-500)}
+.gate-note{font-size:.79rem;color:var(--gray-600);text-align:center;margin-bottom:20px;line-height:1.55;background:#fef3c7;padding:10px 14px;border-radius:8px;border:1px solid #fcd34d}
+.gate-confirm-btn{width:100%;padding:14px;background:var(--orange);color:#fff;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:.97rem;cursor:pointer;border:none;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:9px}
+.gate-confirm-btn:hover{background:var(--orange-dark);transform:translateY(-1px)}
+.gate-step{display:none}
+.gate-step.active{display:block}
+/* Step 2 – WhatsApp success */
+.gate-success{text-align:center;padding:8px 0 4px}
+.gate-success .gs-icon{width:68px;height:68px;border-radius:50%;background:#dcfce7;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.9rem;color:#16a34a}
+.gate-success h3{font-family:var(--font-head);font-size:1.25rem;font-weight:800;color:var(--blue-dark);margin-bottom:8px}
+.gate-success p{font-size:.87rem;color:var(--gray-600);line-height:1.6;margin-bottom:22px}
+.wa-group-btn{display:flex;align-items:center;justify-content:center;gap:11px;background:var(--green);color:#fff;padding:14px 24px;border-radius:50px;font-family:var(--font-head);font-weight:700;font-size:1rem;width:100%;margin-bottom:11px;transition:all .25s;cursor:pointer;border:none}
+.wa-group-btn:hover{background:var(--green-dark);transform:translateY(-2px)}
+.gate-back-link{font-size:.82rem;color:var(--gray-400);cursor:pointer;transition:color .2s;background:none;border:none;font-family:var(--font-body);display:block;text-align:center;margin-top:4px}
+.gate-back-link:hover{color:var(--gray-700)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){
+  .pricing-section{grid-template-columns:1fr}
+  .client-cards{grid-template-columns:1fr 1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-content{grid-template-columns:1fr;gap:36px}
+  .hero-visual{max-width:480px;margin:0 auto}
+  .consulting-grid{grid-template-columns:1fr}
+  .inscription-grid{grid-template-columns:1fr}
+  .temo-grid,.blog-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  :root{--banner-h:36px}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .hero-content{padding:38px 0}
+  .hero-stats{gap:18px}
+  .section{padding:56px 0}
+  .client-cards,.blog-grid,.temo-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr}
+  .footer-bottom{flex-direction:column;text-align:center}
+  .features-grid{flex-direction:column}
+  .feature-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  #chatbot-window{width:calc(100vw - 40px);right:20px}
+  .gate-card{max-height:90vh;overflow-y:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     BANDE PROMOTIONNELLE DÉFILANTE
+════════════════════════════════════════════ -->
+<div id="promo-banner">
+  <div class="promo-fixed">
+    <i class="fas fa-shield-alt"></i>
+    <span>Tarifs révisés au 01/04/2025</span>
+    <span class="promo-sep">·</span>
+    <i class="fas fa-bolt"></i>
+    <span>Paiement sécurisé par Wave CI uniquement</span>
+    <span class="promo-sep">·</span>
+    <i class="fab fa-whatsapp"></i>
+    <span>+225 05 66 88 56 40</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="logo">
+      <div class="logo-icon">DE</div>
+      <div class="logo-text">DataEcon CI<span>Analyse · Formation · Consulting</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="#formations">Formations</a>
+      <a href="#consulting">Consulting</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#ressources">Ressources</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#inscription" class="btn btn-primary">
+        <i class="fas fa-graduation-cap"></i> S'inscrire
+      </a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#formations" onclick="closeMenu()">Formations</a>
+  <a href="#consulting" onclick="closeMenu()">Consulting</a>
+  <a href="#tarifs" onclick="closeMenu()">Tarifs</a>
+  <a href="#ressources" onclick="closeMenu()">Ressources</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="#inscription" onclick="closeMenu()" style="background:var(--orange);color:#fff;text-align:center;font-weight:700;margin-top:6px">
+    <i class="fas fa-graduation-cap"></i> S'inscrire à une formation
+  </a>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="hero-orb1"></div>
+    <div class="hero-orb2"></div>
+  </div>
+  <div class="container">
+    <div class="hero-content">
+      <div>
+        <div class="hero-badge">
+          <i class="fas fa-map-marker-alt" style="color:var(--orange)"></i>
+          <span>Expert Data Science & Économétrie – Côte d'Ivoire</span>
+        </div>
+        <h1 class="hero-title">Transformez vos <span class="accent">données</span> en décisions stratégiques</h1>
+        <p class="hero-desc">Formations certifiantes, consulting décisionnel et accompagnement personnalisé en analyse de données, économétrie et logiciels spécialisés. Basé à Abidjan, actif dans toute l'Afrique.</p>
+        <div class="hero-btns">
+          <a href="#formations" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Voir les formations</a>
+          <a href="#inscription" class="btn btn-outline"><i class="fas fa-handshake"></i> Devis gratuit</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item"><div class="stat-num">20<span>+</span></div><div class="stat-label">Formations</div></div>
+          <div class="stat-item"><div class="stat-num">98<span>%</span></div><div class="stat-label">Satisfaction</div></div>
+          <div class="stat-item"><div class="stat-num">500<span>+</span></div><div class="stat-label">Apprenants</div></div>
+          <div class="stat-item"><div class="stat-num">5<span>+</span></div><div class="stat-label">Experts</div></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="floating-badge top">
+          <div class="fb-icon orange"><i class="fas fa-trophy"></i></div>
+          <div><div class="fb-text">Certifié Expert</div><div class="fb-sub">Données & Économétrie</div></div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-title"><i class="fas fa-chart-bar" style="color:var(--orange)"></i> Performances formations</div>
+          <div class="hero-chart">
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            <div class="bar"></div><div class="bar"></div><div class="bar"></div><div class="bar"></div>
+          </div>
+          <div class="mini-tags">
+            <span class="mini-tag blue">Python</span>
+            <span class="mini-tag orange">Stata</span>
+            <span class="mini-tag green">R</span>
+            <span class="mini-tag blue">Power BI</span>
+            <span class="mini-tag orange">Économétrie</span>
+            <span class="mini-tag green">LaTeX</span>
+          </div>
+        </div>
+        <div class="floating-badge bottom">
+          <div class="fb-icon blue"><i class="fas fa-users"></i></div>
+          <div><div class="fb-text">+500 apprenants</div><div class="fb-sub">Satisfaits & certifiés</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURES STRIP
+════════════════════════════════════════════ -->
+<div id="features-strip">
+  <div class="container">
+    <div class="features-grid">
+      <div class="feature-item"><div class="fi-icon"><i class="fas fa-laptop-code"></i></div><div class="fi-text"><strong>Présentiel & Distanciel</strong><span>Flexibilité totale</span></div></div>
+      <div class="feature-item"><div class="fi-icon"><i class="fas fa-certificate"></i></div><div class="fi-text"><strong>Formations certifiantes</strong><span>Attestation officielle</span></div></div>
+      <div class="feature-item"><div class="fi-icon"><i class="fab fa-whatsapp"></i></div><div class="fi-text"><strong>Suivi WhatsApp</strong><span>Groupe privé dédié</span></div></div>
+      <div class="feature-item"><div class="fi-icon"><i class="fas fa-wave-square"></i></div><div class="fi-text"><strong>Paiement Wave CI</strong><span>Unique moyen accepté</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     FORMATIONS
+════════════════════════════════════════════ -->
+<section class="section" id="formations">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Nos formations</div>
+      <h2 class="section-title">Un catalogue complet<br>pour tous les niveaux</h2>
+      <p class="section-sub">De débutant à expert, maîtrisez les outils incontournables de l'analyse de données et de l'économétrie.</p>
+    </div>
+    <div class="tab-nav reveal">
+      <button class="tab-btn active" onclick="switchTab('logiciels',this)"><i class="fas fa-code"></i> Logiciels économétriques</button>
+      <button class="tab-btn" onclick="switchTab('science',this)"><i class="fas fa-brain"></i> Science des données</button>
+    </div>
+
+    <!-- Logiciels -->
+    <div class="tab-pane active" id="tab-logiciels">
+      <div class="formation-grid reveal">
+        <div class="formation-card"><div class="fc-icon blue"><i class="fab fa-python"></i></div><div class="fc-title">Python pour la Data Science</div><div class="fc-desc">Pandas, NumPy, Matplotlib, Scikit-learn. Du traitement à la modélisation prédictive.</div><div class="fc-tags"><span class="fc-tag">Anaconda/Miniconda</span><span class="fc-tag">Jupyter</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><span class="fc-level-text">Débutant → Avancé</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon orange"><i class="fas fa-chart-area"></i></div><div class="fc-title">Stata – Économétrie appliquée</div><div class="fc-desc">Régressions, panels, données temporelles, tests économétriques avancés. L'outil des chercheurs.</div><div class="fc-tags"><span class="fc-tag orange">Stata 15/16/17</span><span class="fc-tag orange">Do-files</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><span class="fc-level-text">Débutant → Expert</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon green"><i class="fas fa-r-project"></i></div><div class="fc-title">R & RStudio</div><div class="fc-desc">Statistiques avancées, visualisation ggplot2, R Markdown. Puissant et gratuit.</div><div class="fc-tags"><span class="fc-tag">Tidyverse</span><span class="fc-tag">ggplot2</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><span class="fc-level-text">Fondamental → Avancé</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon purple"><i class="fas fa-database"></i></div><div class="fc-title">Jamovi – Statistiques intuitives</div><div class="fc-desc">Interface graphique, ANOVA, régressions, tests non-paramétriques. Idéal sans code.</div><div class="fc-tags"><span class="fc-tag">Sans code</span><span class="fc-tag">SPSS-like</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><div class="fc-level"></div><span class="fc-level-text">Débutant → Intermédiaire</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon blue"><i class="fas fa-file-code"></i></div><div class="fc-title">LaTeX – Rédaction scientifique</div><div class="fc-desc">Articles académiques, mémoires, thèses, formules mathématiques. Standard de la recherche.</div><div class="fc-tags"><span class="fc-tag">Overleaf</span><span class="fc-tag">BibTeX</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><div class="fc-level"></div><span class="fc-level-text">Débutant → Maîtrise</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon orange"><i class="fas fa-chart-pie"></i></div><div class="fc-title">Power BI – Business Intelligence</div><div class="fc-desc">Tableaux de bord interactifs, DAX, Power Query, connecteurs. Visualisation pro.</div><div class="fc-tags"><span class="fc-tag orange">Microsoft</span><span class="fc-tag orange">DAX</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><span class="fc-level-text">Fondamental → Avancé</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+
+    <!-- Science des données -->
+    <div class="tab-pane" id="tab-science">
+      <div class="formation-grid reveal">
+        <div class="formation-card"><div class="fc-icon blue"><i class="fas fa-chart-bar"></i></div><div class="fc-title">Statistique descriptive & Inférentielle</div><div class="fc-desc">Tendance centrale, tests d'hypothèses, intervalles de confiance, valeur p.</div><div class="fc-tags"><span class="fc-tag">Tests stats</span><span class="fc-tag">Hypothèses</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><div class="fc-level"></div><span class="fc-level-text">Débutant → Intermédiaire</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon purple"><i class="fas fa-infinity"></i></div><div class="fc-title">Probabilités appliquées</div><div class="fc-desc">Lois de probabilité, théorèmes fondamentaux, chaînes de Markov.</div><div class="fc-tags"><span class="fc-tag">Lois proba</span><span class="fc-tag">Markov</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><span class="fc-level-text">Fondamental → Avancé</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon orange"><i class="fas fa-wave-square"></i></div><div class="fc-title">Économétrie Fondamentale</div><div class="fc-desc">MCO, hypothèses Gauss-Markov, multicolinéarité, hétéroscédasticité.</div><div class="fc-tags"><span class="fc-tag orange">MCO</span><span class="fc-tag orange">Gauss-Markov</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><div class="fc-level"></div><span class="fc-level-text">Fondamental</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon green"><i class="fas fa-project-diagram"></i></div><div class="fc-title">Économétrie Avancée</div><div class="fc-desc">Panels, séries temporelles ARIMA/VAR/VECM, variables instrumentales, probit/logit.</div><div class="fc-tags"><span class="fc-tag">Panel</span><span class="fc-tag">ARIMA</span><span class="fc-tag">VAR</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><span class="fc-level-text">Avancé → Expert</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon blue"><i class="fas fa-landmark"></i></div><div class="fc-title">Analyse économique appliquée</div><div class="fc-desc">Microéconomie, macroéconomie, analyse de politiques, études d'impact.</div><div class="fc-tags"><span class="fc-tag">Politiques</span><span class="fc-tag">Impact</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level"></div><span class="fc-level-text">Intermédiaire → Expert</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+        <div class="formation-card"><div class="fc-icon purple"><i class="fas fa-robot"></i></div><div class="fc-title">Machine Learning pour économistes</div><div class="fc-desc">Random Forest, XGBoost, LASSO/Ridge, applications économiques et financières.</div><div class="fc-tags"><span class="fc-tag">ML</span><span class="fc-tag">LASSO</span><span class="fc-tag">XGBoost</span></div><div class="fc-levels"><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><div class="fc-level filled"></div><span class="fc-level-text">Avancé → Expert</span></div><a href="#inscription" class="fc-link">S'inscrire <i class="fas fa-arrow-right"></i></a></div>
+      </div>
+    </div>
+
+    <div class="format-badges reveal">
+      <div class="format-badge"><i class="fas fa-building"></i><span>Présentiel</span></div>
+      <div class="format-badge"><i class="fas fa-wifi"></i><span>Distanciel (Zoom/Meet)</span></div>
+      <div class="format-badge"><i class="fas fa-industry"></i><span>Intra-entreprise</span></div>
+      <div class="format-badge"><i class="fas fa-user"></i><span>Formation individuelle</span></div>
+      <div class="format-badge"><i class="fas fa-certificate"></i><span>Attestation certifiante</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CONSULTING
+════════════════════════════════════════════ -->
+<section class="section" id="consulting">
+  <div class="container">
+    <div class="consulting-grid">
+      <div>
+        <div class="section-label reveal">Consulting</div>
+        <h2 class="section-title reveal">Accompagnement expert<br>pour vos décisions</h2>
+        <p class="section-sub reveal" style="margin-bottom:32px">Notre équipe vous accompagne de l'analyse brute des données à des recommandations stratégiques concrètes et actionnables.</p>
+        <div class="consulting-services reveal">
+          <div class="service-item"><div class="si-icon"><i class="fas fa-chess-king"></i></div><div><div class="si-title">Aide à la prise de décision stratégique</div><div class="si-desc">Analyse multicritère, scénarios, recommandations fondées sur les données.</div></div></div>
+          <div class="service-item"><div class="si-icon"><i class="fas fa-database"></i></div><div><div class="si-title">Analyse de données pour entreprises</div><div class="si-desc">Nettoyage, exploration, visualisation et interprétation de vos données métier.</div></div></div>
+          <div class="service-item"><div class="si-icon"><i class="fas fa-chart-line"></i></div><div><div class="si-title">Modélisation économétrique</div><div class="si-desc">Estimations, tests, prévisions et modèles structurels sectoriels.</div></div></div>
+          <div class="service-item"><div class="si-icon"><i class="fas fa-search-dollar"></i></div><div><div class="si-title">Études de marché & prévisions</div><div class="si-desc">Analyse concurrentielle, tendances sectorielles, modèles ARIMA/ML.</div></div></div>
+          <div class="service-item"><div class="si-icon"><i class="fas fa-user-tie"></i></div><div><div class="si-title">Accompagnement personnalisé</div><div class="si-desc">Suivi projet, présentation aux décideurs, transfert de compétences.</div></div></div>
+        </div>
+        <a href="#inscription" class="btn btn-primary" style="margin-top:28px"><i class="fas fa-paper-plane"></i> Demander un devis gratuit</a>
+      </div>
+      <div class="consulting-visual reveal">
+        <div class="cv-title">Notre processus</div>
+        <div class="cv-sub">Du brief à la livraison en 5 étapes</div>
+        <div class="process-steps">
+          <div class="process-step"><div class="ps-num">1</div><div class="ps-text"><strong>Diagnostic</strong> – Compréhension de vos besoins et données</div></div>
+          <div class="ps-line"></div>
+          <div class="process-step"><div class="ps-num">2</div><div class="ps-text"><strong>Collecte & Nettoyage</strong> – Validation et traitement</div></div>
+          <div class="ps-line"></div>
+          <div class="process-step"><div class="ps-num">3</div><div class="ps-text"><strong>Modélisation</strong> – Analyse économétrique avancée</div></div>
+          <div class="ps-line"></div>
+          <div class="process-step"><div class="ps-num">4</div><div class="ps-text"><strong>Interprétation</strong> – Insights actionnables</div></div>
+          <div class="ps-line"></div>
+          <div class="process-step"><div class="ps-num">5</div><div class="ps-text"><strong>Livraison</strong> – Rapport complet + présentation décideurs</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     CLIENTÈLE
+════════════════════════════════════════════ -->
+<section class="section" id="clientele">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Qui nous accompagnons</div>
+      <h2 class="section-title">Une offre adaptée<br>à chaque profil</h2>
+      <p class="section-sub">Étudiant, professionnel, chercheur ou entreprise — nous avons la solution sur mesure.</p>
+    </div>
+    <div class="client-cards reveal">
+      <div class="client-card"><div class="cc-icon blue"><i class="fas fa-user-graduate"></i></div><div class="cc-title">Étudiants</div><div class="cc-desc">Formations adaptées, aide aux mémoires et thèses, tarifs préférentiels sur justificatif.</div><div class="cc-tags"><span class="cc-tag">Tarif réduit</span><span class="cc-tag">Mémoire & Thèse</span><span class="cc-tag">Certification</span></div></div>
+      <div class="client-card"><div class="cc-icon orange"><i class="fas fa-building"></i></div><div class="cc-title">Entreprises</div><div class="cc-desc">Formations intra, consulting décisionnel, dashboards personnalisés, plan de formation sur mesure.</div><div class="cc-tags"><span class="cc-tag">Intra-entreprise</span><span class="cc-tag">Devis personnalisé</span><span class="cc-tag">ROI mesurable</span></div></div>
+      <div class="client-card"><div class="cc-icon green"><i class="fas fa-user"></i></div><div class="cc-title">Particuliers</div><div class="cc-desc">Reconversion professionnelle, perfectionnement, montée en compétences en data.</div><div class="cc-tags"><span class="cc-tag">Reconversion</span><span class="cc-tag">Perfectionnement</span><span class="cc-tag">Flexible</span></div></div>
+      <div class="client-card"><div class="cc-icon purple"><i class="fas fa-microscope"></i></div><div class="cc-title">Chercheurs</div><div class="cc-desc">Accompagnement méthodologique, Stata/R/LaTeX spécialisés, validation statistique.</div><div class="cc-tags"><span class="cc-tag">Méthodologie</span><span class="cc-tag">Publication</span><span class="cc-tag">Stata/R/LaTeX</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TARIFS
+════════════════════════════════════════════ -->
+<section class="section" id="tarifs">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Tarification transparente</div>
+      <h2 class="section-title">Des tarifs clairs<br>pour chaque profil</h2>
+      <p class="section-sub">Des prix adaptés à votre situation. Paiement sécurisé par <strong style="color:var(--orange)">Wave CI</strong> uniquement.</p>
+    </div>
+
+    <div class="pricing-section reveal" style="grid-template-columns:repeat(2,1fr)">
+
+      <!-- ÉTUDIANTS -->
+      <div class="pricing-block">
+        <div class="pb-head c-blue">
+          <span class="pb-emoji">🎓</span>
+          <div class="pb-title">Étudiants</div>
+          <div class="pb-subtitle">Sur présentation d'un justificatif étudiant valide</div>
+        </div>
+        <div class="pb-body">
+          <div class="price-row">
+            <div class="price-name"><i class="fas fa-chart-bar"></i>Analyse complète des données de mémoire + interprétation</div>
+            <div class="price-amt"><span class="xof">50 000 XOF</span><span class="per">prestation unique</span></div>
+          </div>
+          <div class="price-row">
+            <div class="price-name"><i class="fas fa-graduation-cap"></i>Formation mensuelle (logiciels / data science)</div>
+            <div class="price-amt"><span class="xof">15 000 XOF</span><span class="per">par mois</span></div>
+          </div>
+        </div>
+        <div class="pb-cta">
+          <button onclick="openGate('etudiant')" class="btn btn-primary" style="width:100%;justify-content:center">
+            <i class="fas fa-arrow-right"></i> Choisir cette offre
+          </button>
+        </div>
+      </div>
+
+      <!-- PARTICULIERS & CHERCHEURS -->
+      <div class="pricing-block featured">
+        <div class="pb-head c-green">
+          <span class="pb-emoji">👤🔬</span>
+          <div class="pb-title">Particuliers & Chercheurs</div>
+          <div class="pb-subtitle">Reconversion, perfectionnement, recherche</div>
+        </div>
+        <div class="pb-body">
+          <div class="price-row">
+            <div class="price-name"><i class="fas fa-chart-line"></i>Analyse complète de données + interprétation stratégique</div>
+            <div class="price-amt"><span class="xof">250 000 XOF</span><span class="per">prestation</span></div>
+          </div>
+          <div class="price-row">
+            <div class="price-name"><i class="fas fa-chalkboard-teacher"></i>Formation complète (cursus data science)</div>
+            <div class="price-amt"><span class="xof">350 000 XOF</span><span class="per">cursus complet</span></div>
+          </div>
+        </div>
+        <div class="pb-cta">
+          <button onclick="openGate('particulier')" class="btn btn-primary" style="width:100%;justify-content:center">
+            <i class="fas fa-arrow-right"></i> Choisir cette offre
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTE DE PAIEMENT -->
+    <div class="payment-note-box reveal">
+      <div class="pn-title"><i class="fas fa-info-circle"></i> Note importante sur les modalités de paiement</div>
+      <div class="pn-rules">
+        <div class="pn-rule">
+          <i class="fas fa-hand-holding-usd"></i>
+          <span><strong>Consulting & Analyse de données :</strong> Payer <strong>35% des frais</strong> avant le démarrage des travaux. Le solde restant (65%) est dû après réception et validation des livrables.</span>
+        </div>
+        <div class="pn-rule">
+          <i class="fas fa-graduation-cap"></i>
+          <span><strong>Formations :</strong> Payer <strong>70% des frais</strong> avant le début de la formation. Le solde restant (30%) est dû pour recevoir votre <strong>certificat de formation</strong>.</span>
+        </div>
+        <div class="pn-rule">
+          <i class="fas fa-shield-alt"></i>
+          <span><strong>Accès au groupe WhatsApp privé :</strong> Le lien d'accès est communiqué <strong>uniquement après confirmation du paiement d'avance</strong> par notre équipe.</span>
+        </div>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PAIEMENT
+════════════════════════════════════════════ -->
+<section id="paiement">
+  <div class="container">
+    <div class="pay-inner reveal">
+      <div class="section-label" style="color:var(--orange)">Moyen de paiement</div>
+      <h2 class="section-title" style="color:#fff">Paiement sécurisé par Wave CI</h2>
+      <p class="section-sub">Wave CI est le seul moyen de paiement accepté. Payez votre acompte directement via le lien ci-dessous, puis envoyez votre capture d'écran à <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f49095809591979b9a979db49399959d98da979b99">[email&#160;protected]</a>.</p>
+      <div class="pay-methods">
+        <div class="pm-card wave-card" style="border-color:rgba(76,175,80,.7);min-width:260px">
+          <div class="pm-icon">📱</div>
+          <div class="pm-name">Wave CI</div>
+          <div class="pm-detail">Paiement instantané &amp; sécurisé<br>Wave Côte d'Ivoire</div>
+        </div>
+      </div>
+
+      <!-- Boutons d'action paiement -->
+      <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:28px">
+        <a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" class="wave-btn">
+          <i class="fas fa-bolt"></i> Payer via Wave maintenant
+        </a>
+      </div>
+      <div class="sec-note" style="margin-top:20px"><i class="fas fa-lock"></i> Paiement 100% sécurisé &nbsp;·&nbsp; Reçu envoyé par WhatsApp &nbsp;·&nbsp; <i class="fas fa-envelope"></i> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0a6e6b7e6b6f69656469634a6d676b636624696567">[email&#160;protected]</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     INSCRIPTION
+════════════════════════════════════════════ -->
+<section class="section" id="inscription">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Inscription</div>
+      <h2 class="section-title">Rejoignez notre communauté<br>d'apprenants</h2>
+      <p class="section-sub">Remplissez le formulaire. Après confirmation de votre paiement d'avance, vous recevrez l'accès à votre groupe WhatsApp dédié.</p>
+    </div>
+    <div class="inscription-grid reveal">
+      <!-- FORMULAIRE -->
+      <div class="form-card">
+        <div class="form-title">Formulaire d'inscription</div>
+        <div class="form-sub">Les champs marqués <span style="color:var(--orange)">*</span> sont obligatoires</div>
+        <form id="inscriptionForm" action="https://formspree.io/f/xdawppld" method="POST" onsubmit="handleFormSubmit(event)">
+
+          <!-- Champs cachés Formspree → email auto vers dataeconci@gmail.com -->
+          <input type="hidden" name="_replyto"  id="h-replyto">
+          <input type="hidden" name="_subject"  id="h-subject" value="🔔 Nouvelle inscription – DataEcon CI">
+          <input type="hidden" name="_cc"        value="dataeconci@gmail.com">
+          <input type="hidden" name="_language" value="fr">
+          <input type="hidden" name="_format"   value="plain">
+          <input type="hidden" name="Source"    value="Site web DataEcon CI">
+          <input type="hidden" name="Date"      id="h-date">
+          <input type="hidden" name="Nom complet" id="h-fullname">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" id="f-nom" name="Nom" placeholder="Votre nom" required>
+            </div>
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" id="f-prenom" name="Prénom" placeholder="Votre prénom" required>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" id="f-email" name="Email" placeholder="email@exemple.com" required>
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" id="f-tel" name="Téléphone" placeholder="+225 07 XX XX XX XX" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Vous êtes <span class="req">*</span></label>
+            <select id="f-profil" name="Profil" required onchange="updateServiceOptions()">
+              <option value="">-- Sélectionnez votre profil --</option>
+              <option value="etudiant">🎓 Étudiant</option>
+              <option value="particulier">👤 Particulier</option>
+              <option value="chercheur">🔬 Chercheur / Académicien</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Service souhaité <span class="req">*</span></label>
+            <select id="f-service" name="Service souhaité" required onchange="updateAcompte()">
+              <option value="">-- Choisissez un service --</option>
+              <optgroup label="🖥️ Logiciels économétriques">
+                <option>Python pour la Data Science</option>
+                <option>Stata – Économétrie appliquée</option>
+                <option>R &amp; RStudio</option>
+                <option>Jamovi – Statistiques intuitives</option>
+                <option>LaTeX – Rédaction scientifique</option>
+                <option>Power BI – Business Intelligence</option>
+              </optgroup>
+              <optgroup label="📐 Science des données">
+                <option>Statistique descriptive &amp; Inférentielle</option>
+                <option>Probabilités appliquées</option>
+                <option>Économétrie Fondamentale</option>
+                <option>Économétrie Avancée</option>
+                <option>Analyse économique appliquée</option>
+                <option>Machine Learning pour économistes</option>
+              </optgroup>
+              <optgroup label="💼 Consulting / Analyse">
+                <option>Analyse de données de mémoire</option>
+                <option>Analyse de données + interprétation stratégique</option>
+                <option>Modélisation économétrique</option>
+              </optgroup>
+            </select>
+          </div>
+          <!-- Champ caché acompte calculé dynamiquement -->
+          <input type="hidden" name="Montant acompte" id="h-acompte">
+          <input type="hidden" name="Prix total" id="h-prix-total">
+          <!-- Affichage dynamique de l'acompte -->
+          <div id="acompte-display" style="display:none;margin-bottom:14px;padding:12px 16px;background:#fff7ed;border:1.5px solid #fdba74;border-radius:9px;font-family:var(--font-head);font-size:.88rem;color:#92400e">
+            <i class="fas fa-hand-holding-usd" style="color:var(--orange)"></i>
+            <strong id="acompte-label"></strong>
+          </div>
+          <div class="form-group">
+            <label>Message (optionnel)</label>
+            <textarea id="f-msg" name="Message" placeholder="Précisez vos besoins, votre niveau actuel ou vos questions..."></textarea>
+          </div>
+
+          <button type="submit" class="form-submit" id="submitBtn">
+            <i class="fas fa-paper-plane" id="submitIcon"></i>
+            <span id="submitText">Valider mon inscription</span>
+          </button>
+
+          <!-- Bandeau de statut (succès / erreur) -->
+          <div id="form-status" style="display:none;margin-top:14px;padding:14px 18px;border-radius:10px;font-family:var(--font-head);font-size:.88rem;font-weight:600;text-align:center;line-height:1.5"></div>
+        </form>
+      </div>
+
+      <!-- SIDEBAR DROITE -->
+      <div>
+        <div class="wa-intro">
+          <h3><i class="fab fa-whatsapp" style="font-size:1.7rem"></i> Groupes WhatsApp privés</h3>
+          <p>Après validation de votre paiement d'avance, vous rejoignez un groupe WhatsApp dédié à votre service avec accès aux ressources, annonces et support de notre équipe.</p>
+        </div>
+        <div class="qr-box-card">
+          <h4><i class="fas fa-qrcode" style="color:var(--blue-light)"></i> &nbsp;Scannez pour accéder</h4>
+          <div id="qrcode-main"></div>
+          <p class="qr-note">Scannez avec WhatsApp → <em>Appareil photo → Scanner un code QR</em></p>
+        </div>
+        <div class="info-box">
+          <strong><i class="fas fa-info-circle" style="color:var(--blue-light)"></i> &nbsp;Ce que vous obtenez</strong>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Confirmation d'inscription sous 24h</li>
+            <li><i class="fas fa-check-circle"></i> Instructions de paiement personnalisées</li>
+            <li><i class="fas fa-check-circle"></i> Accès au groupe WhatsApp après paiement</li>
+            <li><i class="fas fa-check-circle"></i> Planning de formation adapté à vos disponibilités</li>
+            <li><i class="fas fa-check-circle"></i> Ressources PDF et supports de cours inclus</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BLOG / RESSOURCES
+════════════════════════════════════════════ -->
+<section class="section" id="ressources">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Ressources & Blog</div>
+      <h2 class="section-title">Apprenez, explorez,<br>progressez</h2>
+      <p class="section-sub">Articles, guides et études de cas pour rester à la pointe de l'analyse de données et de l'économétrie.</p>
+    </div>
+    <div class="blog-grid reveal">
+      <div class="blog-card"><div class="blog-img c1">📈<span class="blog-cat">Économétrie</span></div><div class="blog-body"><div class="blog-title">Comment choisir le bon modèle économétrique pour votre étude ?</div><div class="blog-excerpt">Guide pratique pour sélectionner entre OLS, panel, probit/logit selon la nature de vos données.</div><div class="blog-meta"><i class="fas fa-calendar"></i> Mars 2025 <span>·</span> <i class="fas fa-clock"></i> 8 min</div></div></div>
+      <div class="blog-card"><div class="blog-img c2">🐍<span class="blog-cat">Python</span></div><div class="blog-body"><div class="blog-title">Python vs Stata vs R : Quel logiciel pour l'économètre en 2025 ?</div><div class="blog-excerpt">Comparaison détaillée des trois outils phares : performances, courbe d'apprentissage et recommandations.</div><div class="blog-meta"><i class="fas fa-calendar"></i> Fév. 2025 <span>·</span> <i class="fas fa-clock"></i> 12 min</div></div></div>
+      <div class="blog-card"><div class="blog-img c3">📊<span class="blog-cat">Power BI</span></div><div class="blog-body"><div class="blog-title">Power BI pour les économistes : dashboards impactants en 5 étapes</div><div class="blog-excerpt">Tutoriel pas à pas pour construire un tableau de bord professionnel avec données macroéconomiques.</div><div class="blog-meta"><i class="fas fa-calendar"></i> Jan. 2025 <span>·</span> <i class="fas fa-clock"></i> 10 min</div></div></div>
+    </div>
+    <div style="text-align:center;margin-top:32px"><a href="#contact" class="btn btn-blue"><i class="fas fa-book-open"></i> Voir tous les articles</a></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TÉMOIGNAGES
+════════════════════════════════════════════ -->
+<section id="temoignages">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Témoignages</div>
+      <h2 class="section-title">Ce que disent nos apprenants</h2>
+    </div>
+    <div class="temo-grid reveal" style="grid-template-columns:repeat(2,1fr)">
+      <div class="temo-card"><div class="stars">★★★★★</div><div class="temo-text">"La formation Stata m'a permis de finaliser mon mémoire de Master avec des modèles robustes. L'accompagnement était exceptionnel, très pédagogue et toujours disponible."</div><div class="temo-author"><div class="temo-avatar" style="background:var(--blue-light)">KD</div><div><div class="ta-name">Kouamé Didier</div><div class="ta-role">Étudiant M2 Économie – Université FHB</div></div></div></div>
+      <div class="temo-card"><div class="stars">★★★★★</div><div class="temo-text">"Excellente formation Python pour la data science. Le formateur a adapté le rythme à mon niveau. Je suis maintenant autonome sur mes analyses économétriques."</div><div class="temo-author"><div class="temo-avatar" style="background:#7c3aed">ST</div><div><div class="ta-name">Séraphin Touré</div><div class="ta-role">Chercheur – CIRES Abidjan</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Questions fréquentes</h2>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Comment fonctionne l'accès au groupe WhatsApp ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Après validation de votre inscription et confirmation du <strong>paiement d'avance</strong> (35% pour consulting/analyse, 70% pour les formations), notre équipe vous envoie le lien d'accès au groupe WhatsApp privé dédié à votre service. Cet accès est strictement réservé aux inscrits ayant effectué le paiement.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Comment puis-je payer ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Nous acceptons <strong>uniquement Wave CI</strong> comme moyen de paiement. Payez directement via ce lien : <a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" style="color:var(--blue-light)">pay.wave.com</a>, puis envoyez votre capture d'écran à <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c585d485d595f53525f557c5b515d5550125f5351">[email&#160;protected]</a></strong>. L'accès au groupe WhatsApp est accordé sous 24h après vérification.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quelle est la durée d'une formation ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">La durée varie selon la formation : de 10h pour les fondamentaux à 40h+ pour les cursus avancés. Des formats intensifs (week-end) ou étalés (soirs en semaine) sont disponibles selon vos disponibilités.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Reçoit-on une attestation à la fin de la formation ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Oui. Une attestation de formation détaillée est délivrée après règlement du solde restant (30%). Elle est signée et disponible en version numérique et physique sur demande.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Les formations sont-elles disponibles hors de Côte d'Ivoire ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Oui. Toutes nos formations en distanciel sont accessibles depuis n'importe quel pays. Nous avons formé des apprenants au Sénégal, Mali, Cameroun, Burkina Faso et France. Contactez-nous pour adapter le fuseau horaire.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Que comprend le service de consulting ? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Le consulting inclut : diagnostic de vos données, collecte et nettoyage, modélisation économétrique ou statistique avancée, interprétation des résultats, livraison d'un rapport complet et présentation aux décideurs si nécessaire. Paiement : 35% à la commande, 65% à la livraison.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════ -->
+<footer id="contact">
+  <div class="container">
+    <div class="footer-grid" style="grid-template-columns:2fr 1fr 1fr">
+      <div>
+        <div class="footer-logo">
+          <div class="logo-icon">DE</div>
+          <div class="logo-text" style="color:#fff">DataEcon CI<span style="color:rgba(255,255,255,.45)">Analyse · Formation · Consulting</span></div>
+        </div>
+        <p class="footer-desc">Expert en analyse de données, formations économétriques certifiantes et consulting décisionnel. Basé à Abidjan, actif dans toute l'Afrique francophone.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://wa.me/2250566885640" target="_blank" class="social-link" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="social-link" title="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="#" class="social-link" title="Twitter/X"><i class="fab fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Formations</h4>
+        <ul>
+          <li><a href="#formations">Python & Data Science</a></li>
+          <li><a href="#formations">Stata – Économétrie</a></li>
+          <li><a href="#formations">R & RStudio</a></li>
+          <li><a href="#formations">Power BI</a></li>
+          <li><a href="#formations">LaTeX</a></li>
+          <li><a href="#formations">Machine Learning</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="fc-contact"><i class="fas fa-map-marker-alt"></i><span>Abidjan, Côte d'Ivoire<br>(Cocody / Plateau)</span></div>
+        <div class="fc-contact"><i class="fab fa-whatsapp"></i><a href="https://wa.me/2250566885640" target="_blank">+225 05 66 88 56 40</a></div>
+        <div class="fc-contact"><i class="fas fa-envelope"></i><a href="/cdn-cgi/l/email-protection#b4d0d5c0d5d1d7dbdad7ddf4d3d9d5ddd89ad7dbd9"><span class="__cf_email__" data-cfemail="99fdf8edf8fcfaf6f7faf0d9fef4f8f0f5b7faf6f4">[email&#160;protected]</span></a></div>
+        <div class="fc-contact"><i class="fas fa-clock"></i><span>Lun–Sam : 8h – 20h</span></div>
+        <div class="fc-contact" style="margin-top:12px"><i class="fas fa-bolt" style="color:#4CAF50"></i><a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" style="color:#4CAF50;font-weight:700">Payer via Wave CI</a></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 DataEcon CI. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">CGV</a>
+        <a href="#">Confidentialité</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     CHATBOT
+════════════════════════════════════════════ -->
+<button id="chatbot-btn" onclick="toggleChat()" title="Assistance instantanée" aria-label="Ouvrir le chat">
+  <i class="fas fa-comments"></i>
+</button>
+<div id="chatbot-window">
+  <div class="chat-header">
+    <div class="chat-avatar"><i class="fas fa-robot"></i></div>
+    <div class="chat-info">
+      <div class="chat-name">Assistant DataEcon</div>
+      <div class="chat-status">● En ligne</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+  </div>
+  <div class="chat-messages" id="chatMessages">
+    <div class="chat-msg bot">👋 Bonjour ! Je suis l'assistant de DataEcon CI. Comment puis-je vous aider ?</div>
+    <div class="chat-msg bot">Posez-moi vos questions sur nos formations, tarifs ou l'inscription !</div>
+  </div>
+  <div class="chat-sugs">
+    <span class="chat-sug" onclick="sendSug(this)">📚 Formations</span>
+    <span class="chat-sug" onclick="sendSug(this)">💰 Tarifs</span>
+    <span class="chat-sug" onclick="sendSug(this)">💳 Paiement</span>
+    <span class="chat-sug" onclick="sendSug(this)">📱 WhatsApp</span>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" placeholder="Votre message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PAYMENT GATE MODAL
+════════════════════════════════════════════ -->
+<div id="payment-gate">
+  <div class="gate-card">
+    <div class="gate-header">
+      <h2>Finaliser votre inscription</h2>
+      <p>Choisissez votre moyen de paiement d'avance pour accéder à votre groupe WhatsApp</p>
+      <button class="gate-close-btn" onclick="closeGate()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="gate-body">
+
+      <!-- Étape 1 : paiement -->
+      <div class="gate-step active" id="gate-step1">
+        <div class="gate-summary" id="gate-summary">
+          <!-- rempli dynamiquement -->
+        </div>
+        <div class="gate-note">
+          ⚠️ L'accès au groupe WhatsApp est accordé <strong>uniquement après confirmation du paiement d'avance</strong> par notre équipe (sous 24h ouvrées).
+        </div>
+        <div class="gate-methods">
+          <a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" class="gate-method" style="border-color:rgba(76,175,80,.4);background:#f0fdf4">
+            <div class="gm-icon" style="background:#dcfce7;font-size:1.3rem">📱</div>
+            <div>
+              <div class="gm-label">Payer via Wave CI</div>
+              <div class="gm-sub">Cliquez → payez le montant exact → revenez confirmer</div>
+            </div>
+            <i class="fas fa-external-link-alt" style="color:var(--gray-400);margin-left:auto;font-size:.8rem"></i>
+          </a>
+          <a href="/cdn-cgi/l/email-protection#c5a1a4b1a4a0a6aaaba6ac85a2a8a4aca9eba6aaa8" class="gate-method">
+            <div class="gm-icon" style="background:#fff7ed"><i class="fas fa-envelope" style="color:var(--orange);font-size:1.1rem"></i></div>
+            <div><div class="gm-label">Envoyer le reçu par email</div><div class="gm-sub"><span class="__cf_email__" data-cfemail="d1b5b0a5b0b4b2bebfb2b891b6bcb0b8bdffb2bebc">[email&#160;protected]</span> — après paiement Wave</div></div>
+          </a>
+        </div>
+        <button class="gate-confirm-btn" onclick="goToStep2()">
+          <i class="fas fa-check-circle"></i> J'ai effectué mon paiement d'avance
+        </button>
+      </div>
+
+      <!-- Étape 2 : succès + lien WhatsApp -->
+      <div class="gate-step" id="gate-step2">
+        <div class="gate-success">
+          <div class="gs-icon"><i class="fas fa-check"></i></div>
+          <h3>Paiement enregistré !</h3>
+          <p>Merci ! Votre déclaration de paiement a été enregistrée. Notre équipe va vérifier votre paiement et vous confirmera l'accès au groupe WhatsApp <strong>sous 24h ouvrées</strong>.<br><br>En attendant, vous pouvez rejoindre le groupe d'attente ci-dessous :</p>
+          <a href="https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t" target="_blank" class="wa-group-btn">
+            <i class="fab fa-whatsapp" style="font-size:1.4rem"></i> Rejoindre le groupe WhatsApp
+          </a>
+          <button class="gate-back-link" onclick="closeGate()">Fermer et revenir au site</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ===== CONFIG WhatsApp liens par service ===== */
+const WA_GROUPS = {
+  // Formations
+  'formation_logiciels': 'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+  'formation_office':    'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+  'formation_science':   'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+  // Consulting
+  'consulting':          'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+  'analyse':             'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+  // Défaut
+  'default':             'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t'
+};
+
+/* ===== Navbar scroll ===== */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  const mm  = document.getElementById('mobileMenu');
+  if (window.scrollY > 50) {
+    nav.classList.add('scrolled');
+    mm.classList.add('scrolled-nav');
+  } else {
+    nav.classList.remove('scrolled');
+    mm.classList.remove('scrolled-nav');
+  }
+});
+
+/* ===== Mobile menu ===== */
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+function closeMenu()  { document.getElementById('mobileMenu').classList.remove('open'); }
+
+/* ===== Tabs ===== */
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ===== FAQ ===== */
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const was  = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!was) item.classList.add('open');
+}
+
+/* ===== Scroll reveal ===== */
+new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 }).observe = (() => {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  return obs.observe.bind(obs);
+})();
+
+/* ===== QR Code ===== */
+window.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('qrcode-main');
+  if (el && typeof QRCode !== 'undefined') {
+    new QRCode(el, {
+      text: 'https://chat.whatsapp.com/HTKqGRsHG576MDjGF0EQzg?mode=gi_t',
+      width: 148,
+      height: 148,
+      colorDark: '#0a1628',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
+  }
+});
+
+/* ===== Tarifs premium avec acomptes dynamiques ===== */
+const TARIFS = {
+  etudiant: {
+    label: '🎓 Offre Étudiant',
+    rows: [
+      { name: 'Analyse complète des données de mémoire', amt: '50 000 XOF', total: 50000, avance: '35% = 17 500 XOF', acompte: 17500 },
+      { name: 'Formation mensuelle (logiciels / data science)', amt: '15 000 XOF/mois', total: 15000, avance: '70% = 10 500 XOF', acompte: 10500 }
+    ]
+  },
+  particulier: {
+    label: '👤 Offre Particulier / Chercheur',
+    rows: [
+      { name: 'Analyse complète de données + interprétation stratégique', amt: '250 000 XOF', total: 250000, avance: '35% = 87 500 XOF', acompte: 87500 },
+      { name: 'Formation complète (cursus data science)', amt: '350 000 XOF', total: 350000, avance: '70% = 245 000 XOF', acompte: 245000 }
+    ]
+  },
+  chercheur: {
+    label: '🔬 Offre Chercheur',
+    rows: [
+      { name: 'Analyse complète de données + interprétation stratégique', amt: '250 000 XOF', total: 250000, avance: '35% = 87 500 XOF', acompte: 87500 },
+      { name: 'Formation complète (cursus data science)', amt: '350 000 XOF', total: 350000, avance: '70% = 245 000 XOF', acompte: 245000 }
+    ]
+  }
+};
+
+/* ===== Calcul dynamique de l'acompte selon le service choisi ===== */
+function updateAcompte() {
+  const service  = document.getElementById('f-service').value.toLowerCase();
+  const profil   = document.getElementById('f-profil').value;
+  const display  = document.getElementById('acompte-display');
+  const label    = document.getElementById('acompte-label');
+  const hAcompte = document.getElementById('h-acompte');
+  const hPrix    = document.getElementById('h-prix-total');
+
+  if (!service || !profil) { display.style.display='none'; return; }
+
+  let total = 0, acompte = 0, pct = 0;
+  const isFormation = service.includes('formation') || service.includes('python') || service.includes('stata') || service.includes('r &') || service.includes('jamovi') || service.includes('latex') || service.includes('power bi') || service.includes('statistique') || service.includes('probabilit') || service.includes('économétrie') || service.includes('machine learning') || service.includes('analyse économique');
+  const isAnalyse   = service.includes('analyse') || service.includes('mémoire') || service.includes('modélisation');
+
+  if (profil === 'etudiant') {
+    if (isFormation) { total = 15000; pct = 70; }
+    else if (isAnalyse) { total = 50000; pct = 35; }
+  } else {
+    // particulier ou chercheur
+    if (isFormation) { total = 350000; pct = 70; }
+    else if (isAnalyse) { total = 250000; pct = 35; }
+  }
+
+  if (total > 0) {
+    acompte = Math.round(total * pct / 100);
+    const fmt = n => n.toLocaleString('fr-FR') + ' XOF';
+    label.textContent = ' Acompte requis : ' + fmt(acompte) + ' (' + pct + '% de ' + fmt(total) + ')';
+    hAcompte.value = fmt(acompte);
+    hPrix.value    = fmt(total);
+    display.style.display = 'block';
+  } else {
+    display.style.display = 'none';
+  }
+}
+
+function updateServiceOptions() { updateAcompte(); }
+
+/* ===== Ouvrir la gate de paiement ===== */
+function openGate(profil) {
+  const data = TARIFS[profil] || TARIFS['particulier'];
+  const sum  = document.getElementById('gate-summary');
+
+  // Récupérer l'acompte calculé dynamiquement si disponible
+  const hAcompte = document.getElementById('h-acompte');
+  const hPrix    = document.getElementById('h-prix-total');
+  const service  = document.getElementById('f-service') ? document.getElementById('f-service').value : '';
+  const acompteVal = hAcompte ? hAcompte.value : '';
+  const prixVal    = hPrix    ? hPrix.value    : '';
+
+  let summaryHTML = `<div style="font-family:var(--font-head);font-weight:700;color:var(--blue-dark);margin-bottom:10px;font-size:.95rem">${data.label}</div>`;
+
+  if (acompteVal && prixVal && service) {
+    summaryHTML += `
+      <div class="gs-line"><span>Service</span><span style="font-size:.82rem;color:var(--gray-600)">${service}</span></div>
+      <div class="gs-line"><span>Prix total</span><span>${prixVal}</span></div>
+      <div class="gs-line" style="font-size:.9rem;color:var(--orange-dark);border-top:2px solid var(--orange-light);padding-top:10px;margin-top:6px">
+        <span><strong>⚡ Acompte à payer maintenant</strong></span>
+        <span style="font-weight:800;font-size:1.1rem">${acompteVal}</span>
+      </div>`;
+  } else {
+    summaryHTML += data.rows.map(r => `
+      <div class="gs-line"><span>${r.name}</span><span>${r.amt}</span></div>
+      <div class="gs-line" style="font-size:.78rem;color:var(--orange-dark);border:none;padding:0;margin:0 0 6px">
+        <span style="font-style:italic">→ Avance requise</span>
+        <span style="font-weight:800">${r.avance}</span>
+      </div>`).join('');
+  }
+
+  summaryHTML += `<div class="gs-line" style="margin-top:10px;background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:8px 12px">
+    <span><i class="fas fa-bolt" style="color:#16a34a"></i> &nbsp;Lien Wave CI</span>
+    <span><a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" style="color:#16a34a;font-family:var(--font-head);font-weight:700;font-size:.85rem">Payer ici →</a></span>
+  </div>`;
+
+  sum.innerHTML = summaryHTML;
+  document.getElementById('gate-step1').classList.add('active');
+  document.getElementById('gate-step2').classList.remove('active');
+  document.getElementById('payment-gate').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeGate() {
+  document.getElementById('payment-gate').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function goToStep2() {
+  document.getElementById('gate-step1').classList.remove('active');
+  document.getElementById('gate-step2').classList.add('active');
+}
+
+// Fermer si clic en dehors
+document.getElementById('payment-gate').addEventListener('click', function(e) {
+  if (e.target === this) closeGate();
+});
+
+/* ===== Formulaire d'inscription – Formspree + WhatsApp + acompte dynamique ===== */
+async function handleFormSubmit(e) {
+  e.preventDefault();
+
+  const nom     = document.getElementById('f-nom').value.trim();
+  const prenom  = document.getElementById('f-prenom').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const tel     = document.getElementById('f-tel').value.trim();
+  const profil  = document.getElementById('f-profil').value;
+  const service = document.getElementById('f-service').value;
+  const msg     = document.getElementById('f-msg').value.trim();
+  const dateNow = new Date().toLocaleString('fr-FR', {dateStyle:'full', timeStyle:'short'});
+  const acompte = document.getElementById('h-acompte').value || 'À calculer';
+  const prixTotal = document.getElementById('h-prix-total').value || 'À définir';
+
+  // Remplir les champs cachés
+  document.getElementById('h-replyto').value  = email;
+  document.getElementById('h-date').value     = dateNow;
+  document.getElementById('h-fullname').value = prenom + ' ' + nom;
+  document.getElementById('h-subject').value  =
+    '🆕 NOUVELLE INSCRIPTION – ' + prenom + ' ' + nom + ' – ' + dateNow;
+
+  // UI – état chargement
+  const btn  = document.getElementById('submitBtn');
+  const icon = document.getElementById('submitIcon');
+  const txt  = document.getElementById('submitText');
+  const stat = document.getElementById('form-status');
+  btn.disabled = true;
+  icon.className = 'fas fa-spinner fa-spin';
+  txt.textContent = 'Envoi en cours…';
+  stat.style.display = 'none';
+
+  // Envoi vers Formspree (notification admin à dataeconci@gmail.com)
+  try {
+    const formData = new FormData(document.getElementById('inscriptionForm'));
+    const resp = await fetch('https://formspree.io/f/xdawppld', {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (resp.ok) {
+      // ✅ Succès
+      icon.className = 'fas fa-check-circle';
+      txt.textContent = 'Inscription enregistrée !';
+      btn.style.background = '#16a34a';
+      stat.style.display = 'block';
+      stat.style.background = '#dcfce7';
+      stat.style.color = '#15803d';
+      stat.style.border = '1.5px solid #86efac';
+      stat.innerHTML = `✅ <strong>Inscription enregistrée !</strong><br>
+        Un email récapitulatif a été envoyé à <strong>${email}</strong>.<br>
+        <span style="font-size:.83rem;margin-top:6px;display:block">
+          📌 <strong>Acompte à payer :</strong> ${acompte} via
+          <a href="https://pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/" target="_blank" style="color:#15803d;font-weight:700">Wave CI →</a><br>
+          Après paiement, envoyez votre reçu à <strong>dataeconci@gmail.com</strong> ou au <strong>+225 05 66 88 56 40</strong> (WhatsApp).
+        </span>`;
+
+      // Notification WhatsApp vers le gérant (notification admin)
+      const waMsg =
+        '🆕 *NOUVELLE INSCRIPTION – DataEcon CI*' +
+        '\n\n👤 *Nom complet :* ' + prenom + ' ' + nom +
+        '\n📧 *Email :* ' + email +
+        '\n📱 *Téléphone :* ' + tel +
+        '\n🎓 *Profil :* ' + profil.charAt(0).toUpperCase() + profil.slice(1) +
+        '\n📚 *Service :* ' + service +
+        '\n\n💰 *Paiement :*' +
+        '\n   Prix total : ' + prixTotal +
+        '\n   Acompte à verser : ' + acompte +
+        (msg ? '\n💬 *Message :* ' + msg : '') +
+        '\n📅 *Date :* ' + dateNow +
+        '\n\n🔔 *ACTIONS REQUISES :*' +
+        '\n☑️ Vérifier paiement Wave CI' +
+        '\n☑️ Envoyer lien WhatsApp après réception du reçu';
+      setTimeout(() => {
+        window.open('https://wa.me/2250566885640?text=' + encodeURIComponent(waMsg), '_blank');
+      }, 1200);
+
+      // Ouvrir la gate de paiement après 1,8s
+      setTimeout(() => {
+        openGate(profil || 'particulier');
+        document.getElementById('inscriptionForm').reset();
+        document.getElementById('acompte-display').style.display = 'none';
+        btn.disabled = false;
+        icon.className = 'fas fa-paper-plane';
+        txt.textContent = 'Valider mon inscription';
+        btn.style.background = '';
+      }, 1800);
+
+    } else {
+      throw new Error('Erreur serveur');
+    }
+  } catch (err) {
+    // ❌ Erreur
+    icon.className = 'fas fa-exclamation-circle';
+    txt.textContent = 'Réessayer';
+    btn.disabled = false;
+    btn.style.background = '#dc2626';
+    stat.style.display = 'block';
+    stat.style.background = '#fee2e2';
+    stat.style.color = '#b91c1c';
+    stat.style.border = '1.5px solid #fca5a5';
+    stat.innerHTML = '❌ Une erreur s\'est produite. Contactez-nous directement au <strong>+225 05 66 88 56 40</strong> (WhatsApp) ou à <strong>dataeconci@gmail.com</strong>.';
+    setTimeout(() => { btn.style.background = ''; icon.className = 'fas fa-paper-plane'; txt.textContent = 'Valider mon inscription'; }, 3000);
+  }
+}
+
+/* ===== Chatbot ===== */
+const CHAT_RESP = {
+  'formation': '📚 Nous proposons des formations en Python, Stata, R, Power BI, LaTeX, économétrie et data science. Consultez la section Formations pour les détails !',
+  'tarif': '💰 Étudiants : analyse mémoire 50 000 XOF (acompte 35%) | formation 15 000 XOF/mois (acompte 70%)\nParticuliers/Chercheurs : analyse 250 000 XOF (acompte 35%) | formation complète 350 000 XOF (acompte 70%)',
+  'paiement': '💳 Nous acceptons uniquement Wave CI. Lien direct : pay.wave.com/m/M_ci_BBSbYjlQgoxi/c/ci/ — Après paiement, envoyez votre reçu à dataeconci@gmail.com',
+  'whatsapp': '📱 L\'accès au groupe WhatsApp est accordé après confirmation du paiement d\'avance (35% pour analyse, 70% pour formations). Inscrivez-vous d\'abord via le formulaire !',
+  'étudiant': '🎓 Pour les étudiants : analyse de données de mémoire à 50 000 XOF (acompte 17 500 XOF) et formations à 15 000 XOF/mois (acompte 10 500 XOF). Justificatif étudiant requis.',
+  'inscription': '✍️ Remplissez le formulaire dans la section Inscription, choisissez votre profil et service. L\'acompte est calculé automatiquement. Vous recevrez les instructions de paiement Wave.',
+  'contact': '📞 Contactez-nous au +225 05 66 88 56 40 (WhatsApp). Horaires : Lun–Sam 8h–20h.',
+  'default': '🤔 Bonne question ! Pour une réponse précise, contactez-nous directement au +225 05 66 88 56 40 (WhatsApp) ou remplissez notre formulaire d\'inscription. Nos experts vous répondent sous 24h !'
+};
+
+function toggleChat() { document.getElementById('chatbot-window').classList.toggle('open'); }
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) retur
